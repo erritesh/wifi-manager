@@ -18,9 +18,13 @@
                                     <input type="text" class="form-control" id="input-dashboard-name" name="appName"
                                            placeholder="Name">
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Icon</label>
-                                    <input type="file" id="exampleInputFile">
+                                <form enctype="multipart/form-data" id="appiconform">
+                                    <div class="form-group">
+                                        <input id="inputFile" multiple="" type="file" name="appimage" id="choose-appicon">
+                                        <input readonly="" class="form-control" placeholder="Choose app icon..." type="text">
+                                    </div>
+                                </form>
+                                <div class="appicon-containner">
                                 </div>
 
                                 <!-- Start data scopes -->
@@ -35,10 +39,14 @@
                                                     <a role="button" data-toggle="collapse" parent="#accordion"
                                                        href="#collapse-ssids" aria-expanded="true"
                                                        aria-controls="collapse-ssids">
-                                                        <input type="radio" id="radio-ssid" value="ssid"
-                                                               name="scope-select"
-                                                               class="criteria-radio">
-                                                        <label>SSID Based</label>
+                                                        <div class="radio radio-primary">
+                                                            <label>
+                                                                <input type="radio" id="radio-ssid" value="ssid"
+                                                                       name="scope-select"
+                                                                       class="criteria-radio">
+                                                                SSID Based
+                                                            </label>
+                                                        </div>
                                                     </a>
                                                 </h4>
                                             </div>
@@ -49,9 +57,12 @@
                                                     <div class="checkbox">
                                                         {{#ssids}}
                                                         <div class="col-sm-6">
-                                                            <label class="radio inline control-label">
-                                                                <input type="checkbox" name="input-ssid" value="{{.}}">{{.}}
-                                                            </label>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="input-ssid"
+                                                                           value="{{.}}">{{.}}
+                                                                </label>
+                                                            </div>
                                                         </div>
                                                         {{/ssids}}
                                                     </div>
@@ -65,9 +76,14 @@
                                                        parent="#accordion"
                                                        href="#collapse-groupnames" aria-expanded="false"
                                                        aria-controls="collapse-groupnames">
-                                                        <input type="radio" id="radio-groupname" value="groupname"
-                                                               name="scope-select" class="criteria-radio">
-                                                        <label>Location Based</label>
+                                                        <div class="radio radio-primary">
+                                                            <label>
+                                                                <input type="radio" id="radio-groupname"
+                                                                       value="groupname"
+                                                                       name="scope-select" class="criteria-radio">
+                                                                Location Based
+                                                            </label>
+                                                        </div>
                                                     </a>
                                                 </h4>
                                             </div>
@@ -77,16 +93,36 @@
                                                     <div class="checkbox">
                                                         {{#locations}}
                                                         <div class="col-sm-6">
-                                                            <label class="checkbox inline control-label">
-                                                                <input type="checkbox" name="input-group"
-                                                                       value="{{.}}">{{.}}
-                                                            </label>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="input-group"
+                                                                           value="{{.}}">{{.}}
+                                                                </label>
+                                                            </div>
                                                         </div>
                                                         {{/locations}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Metrics</label>
+                                </div>
+                                <div class="checkbox">
+                                    <div class="row">
+                                        {{#metrics}}
+                                        <div class="col-sm-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="metric" value="{{metricid}}">{{name}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {{/metrics}}
                                     </div>
                                 </div>
                                 <!-- End data scopes -->
@@ -100,22 +136,6 @@
                                         {{/currentuser}}
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Metrics</label>
-                                </div>
-                                <div class="checkbox">
-                                    <div class="row">
-                                        {{#metrics}}
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <input type="checkbox" name="metric" value="{{metricid}}">{{name}}
-                                            </label>
-                                        </div>
-                                        {{/metrics}}
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" id="aclsinputpanel">
@@ -124,10 +144,12 @@
                                                    parent="#accordion"
                                                    href="#collapse-acls" aria-expanded="false"
                                                    aria-controls="collapse-acls">
-                                                    <label>
-                                                        <input type="checkbox" id="aclaccept" value="">
-                                                    </label>
-                                                    <label>Access Control</label>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" id="aclaccept" value="">
+                                                            Access Control
+                                                        </label>
+                                                    </div>
                                                 </a>
                                             </h4>
                                         </div>
@@ -138,10 +160,12 @@
                                                 <div class="radio">
                                                     {{#acltypes}}
                                                     <div class="col-sm-6">
-                                                        <label class="radio inline control-label">
-                                                            <input type="radio" class="acltypes-radio" name="acl"
-                                                                   value="{{.}}">{{.}}
-                                                        </label>
+                                                        <div class="radio radio-primary">
+                                                            <label>
+                                                                <input type="radio" class="acltypes-radio" name="acl"
+                                                                       value="{{.}}">{{.}}
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                     {{/acltypes}}
                                                 </div>
@@ -154,11 +178,13 @@
                                 </div>
                                 <div class="checkbox">
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <input type="checkbox" id="chkAggregate" value="">Aggregate Location
-                                                data
-                                            </label>
+                                        <div class="col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="chkAggregate" value="">Aggregate Location
+                                                    data
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -176,25 +202,14 @@
 </div>
 
 <script>
-    $('.collapse-acls').collapse('hide');
+    $.material.init();
 
-    $('#aclaccept').on('click', function (e) {
-        e.stopPropagation();
+    $('#collapse-acls').on('shown.bs.collapse', function (e) {
+        $('#aclaccept').prop("checked", true);
     });
 
-    $('#collapse-acls').on('show.bs.collapse', function (e) {
-        if (!$('#aclaccept').is(':checked')) {
-            return false;
-        }
-    });
-
-    $('#aclaccept').change(function () {
-        if (this.checked) {
-            $('.collapse-acl.collapse').collapse('show');
-        } else {
-            $('.collapse-acl.collapse').collapse('hide');
-            $(".acltypes-radio").attr("checked", false);
-        }
+    $('#collapse-acls').on('hidden.bs.collapse', function (e) {
+        $('#aclaccept').prop("checked", false);
     });
 
     $('#collapse-ssids').on('shown.bs.collapse', function () {

@@ -34,21 +34,20 @@ $(document).ajaxSend(function (event, request, settings) {
 
 $(document).ready(function () {
     if (!Cookies.get("jwt")) {
-        //toastr.error("Unauthorised please login")
-        window.location.href = "/dashboard/login"
+        window.location.href = "/dashboard/login";
         return
     } else {
         storeLoggedInUserPermissions()
     }
+    $.material.init();
+    
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    
     renderSidebar(Cookies.get("username"))
     renderDashboardList();
-
-    // Add body-small class if window less than 768px
-    if ($(this).width() < 769) {
-        $('body').addClass('body-small')
-    } else {
-        $('body').removeClass('body-small')
-    }
 
     // Close menu in canvas mode
     $('.close-canvas-menu').click(function () {
@@ -61,19 +60,6 @@ $(document).ready(function () {
         height: '234px',
         railOpacity: 0.4
     });
-
-    // Minimalize menu
-    $('.navbar-minimalize').click(function () {
-        $("body").toggleClass("mini-navbar");
-        SmoothlyMenu();
-    });
-
-    // Tooltips demo
-    $('.tooltip-demo').tooltip({
-        selector: "[data-toggle=tooltip]",
-        container: "body"
-    });
-
     // Move modal to body
     // Fix Bootstrap backdrop issu with animation.css
     $('.modal').appendTo("body");
@@ -106,55 +92,27 @@ $(document).ready(function () {
                 railOpacity: 0.9
             });
         }
-    })
-
-    // Move right sidebar top after scroll
-    $(window).scroll(function () {
-        if ($(window).scrollTop() > 0 && !$('body').hasClass('fixed-nav')) {
-            $('#right-sidebar').addClass('sidebar-top');
-        } else {
-            $('#right-sidebar').removeClass('sidebar-top');
-        }
     });
 
-    $(document).bind("load resize scroll", function () {
-        if (!$("body").hasClass('body-small')) {
-            fix_height();
-        }
-    });
-
-    $("[data-toggle=popover]")
-        .popover();
-
-    // Add slimscroll to element
-    $('.full-height-scroll').slimscroll({
-        height: '100%'
-    })
-
-    $(".logout").on('click', function (event) {
+    $("#signout").on('click', function (event) {
         event.stopImmediatePropagation();
         $.ajax({
             url: '/dashboard/logout',
             type: 'POST',
             success: function () {
                 Cookies.remove('jwt', { secure: true });
-                window.location.href = "/dashboard/login"
+                window.location.href = "/console/login"
             },
             error: function (e) {
             }
         });
-    })
+    });
+
+    $("#my-profile").click(function () {
+        renderProfilePage()
+    });
 });
 
-
-// Minimalize menu when screen is less than 768px
-$(window).bind("resize", function () {
-    if ($(this).width() < 769) {
-        $('body').addClass('body-small')
-    } else {
-        $('body').removeClass('body-small')
-    }
-});
 
 // Collapse ibox function
 $(document.body).on('click', '.collapse-link', function () {
