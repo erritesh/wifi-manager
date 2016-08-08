@@ -43,18 +43,23 @@
         <a href="#" id="href-campaigns"><i class="fa fa-shopping-cart"></i> <span
                 class="nav-label">Ad Campaigns</span> </a>
     </li>
-    <li>
-        <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label">Settings</span><span
-                class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-            <li><a href="#" id="href-dashboarduser-tables">Dashboard Users</a></li>
-            <li><a href="#" id="href-aaa">AAA</a></li>
-        </ul>
+    <li data-toggle="collapse" data-target="#nav-setting">
+                  <a href="#" id="href-settings"><i class="fa fa-cogs"></i> <span class="nav-label">Settings</span>
+                   <span class="caret"></span></a>
+          <ul class="sidebar-sec-nav sub-menu collapse" id="nav-setting" >
+                    <li><a href="#" id="href-dashboarduser-tables">Dashboard Users</a></li>
+                    <li><a href="#" id="href-aaa">AAA</a></li> 
+                </ul>
     </li>
+<li>&nbsp;</li>
 </ul>
 
 <script>
     $(document).ready(function () {
+        $("#href-settings").click(function () {
+             $("#sidebar-wrapper").animate({ scrollTop: $(document).height() }, "slow");
+            //$( "#nav-second-panel" ).offset({ top: 10, left: 30 });
+        });
 
         $("#href-wifiuser-tables").click(function () {
             renderWifiUserTable()
