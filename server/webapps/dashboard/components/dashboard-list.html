@@ -726,7 +726,8 @@
                 $('#app-grid').html(rendered);
                 $grid.shuffle({
                     itemSelector: '.col-xs-6',
-                    sizer: $sizer
+                    sizer: $sizer,
+                    throttle: throttle
                 });
             });
         });
